@@ -62,7 +62,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
           <b>Please note:</b> Using your own Google Gemini API key will incur charges. If left empty, the app will try to use the system-configured free API.
         </div>
         <div className="text-cyan-300/80 bg-cyan-900/20 border border-cyan-700/50 p-3 rounded-lg text-sm mb-6">
-            <b>Notice:</b> We provide cost-effective and stable Nano Banana image generation API. For details, please visit <a href="https://cnb.build/no.1/api/-/issues/2" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-cyan-200">Cost-Effective API Platform</a>.
+            <b>Notice:</b> We provide cost-effective and stable Nano Banana image generation API. For details, please visit <a href="https://cnb.build/no.1/api/-/issues/2" target=\"_blank" rel="noopener noreferrer\" className="font-bold underline hover:text-cyan-200">Cost-Effective API Platform</a>.
         </div>
 
         <div className="flex flex-col gap-4">
@@ -122,3 +122,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
 };
 
 export default SettingsModal;
+
+  )
+}
