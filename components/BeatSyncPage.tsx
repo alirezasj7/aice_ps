@@ -19,39 +19,39 @@ type TransitionStyle = 'ken-burns' | 'shake' | 'flash' | 'slide';
 
 const DEFAULT_PROMPTS = {
     6: [
-        "复古宝丽来照片，色彩褪色，有漏光效果。",
-        "充满活力的日本动漫风格，有大胆的轮廓和赛璐珞着色。",
-        "高对比度、戏剧性的黑白电影黑色美学。",
-        "80年代合成波美学，带有霓虹品红和青色光晕，以及微妙的扫描线。",
-        "印象派油画，笔触可见且厚重。",
-        "未来主义赛博朋к场景，有发光的霓虹灯和雨中反光的街道。"
+        "Vintage Polaroid photo with faded colors and light leak effects.",
+        "Vibrant Japanese anime style with bold outlines and cel-shading.",
+        "High-contrast, dramatic black and white film noir aesthetic.",
+        "80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.",
+        "Impressionist oil painting with visible and thick brushstrokes.",
+        "Futuristic cyberpunk scene with glowing neon lights and rain-soaked reflective streets."
     ],
     8: [
-        "复古宝丽来照片，色彩褪色，有漏光效果。",
-        "充满活力的日本动漫风格，有大胆的轮廓和赛璐珞着色。",
-        "高对比度、戏剧性的黑白电影黑色美学。",
-        "80年代合成波美学，带有霓虹品红和青色光晕，以及微妙的扫描线。",
-        "印象派油画，笔触可见且厚重。",
-        "未来主义赛博朋克场景，有发光的霓虹灯和雨中反光的街道。",
-        "双重曝光效果，将主体与森林景观融合。",
-        "受萨尔瓦多·达利启发的超现实主义，带有梦幻般的元素。"
+        "Vintage Polaroid photo with faded colors and light leak effects.",
+        "Vibrant Japanese anime style with bold outlines and cel-shading.",
+        "High-contrast, dramatic black and white film noir aesthetic.",
+        "80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.",
+        "Impressionist oil painting with visible and thick brushstrokes.",
+        "Futuristic cyberpunk scene with glowing neon lights and rain-soaked reflective streets.",
+        "Double exposure effect blending the subject with forest landscape.",
+        "Surrealism inspired by Salvador Dalí with dreamlike elements."
     ],
     10: [
-        "复古宝丽来照片，色彩褪色，有漏光效果。",
-        "充满活力的日本动漫风格，有大胆的轮廓和赛璐珞着色。",
-        "高对比度、戏剧性的黑白电影黑色美学。",
-        "80年代合成波美学，带有霓虹品红和青色光晕，以及微妙的扫描线。",
-        "印象派油画，笔触可见且厚重。",
-        "未来主义赛博朋к场景，有发光的霓虹灯和雨中反光的街道。",
-        "双重曝光效果，将主体与森林景观融合。",
-        "受萨尔瓦多·达利启发的超现实主义，带有梦幻般的元素。",
-        "装饰艺术海报风格，带有几何形状和金色点缀。",
-        "Lomography风格的交叉处理胶片效果，具有高对比度、过饱和的色彩和暗角。"
+        "Vintage Polaroid photo with faded colors and light leak effects.",
+        "Vibrant Japanese anime style with bold outlines and cel-shading.",
+        "High-contrast, dramatic black and white film noir aesthetic.",
+        "80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.",
+        "Impressionist oil painting with visible and thick brushstrokes.",
+        "Futuristic cyberpunk scene with glowing neon lights and rain-soaked reflective streets.",
+        "Double exposure effect blending the subject with forest landscape.",
+        "Surrealism inspired by Salvador Dalí with dreamlike elements.",
+        "Art Deco poster style with geometric shapes and golden accents.",
+        "Lomography-style cross-processing film effect with high contrast, oversaturated colors and vignetting."
     ],
 };
 
 const MUSIC_TRACKS = [
-    { name: "活力电音", url: "https://huggingface.co/spaces/aigenai/noconb/resolve/main/Rock-Guitar-Power.mp3" },
+    { name: "Energetic Electronic", url: "https://huggingface.co/spaces/aigenai/noconb/resolve/main/Rock-Guitar-Power.mp3" },
 ];
 
 // Helper to add retry logic to image generation
@@ -517,8 +517,8 @@ const BeatSyncPage: React.FC = () => {
     return (
         <div className="w-full max-w-7xl mx-auto p-4 md:p-8 relative">
             <div className="text-center mb-8">
-                <h1 className="font-['Caveat'] text-5xl md:text-7xl font-bold text-white tracking-wider">音画志</h1>
-                <p className="text-gray-300 text-lg md:text-xl mt-2">自定义风格化图集，随节拍一键成片。</p>
+                <h1 className="font-['Caveat'] text-5xl md:text-7xl font-bold text-white tracking-wider">BeatSync</h1>
+                <p className="text-gray-300 text-lg md:text-xl mt-2">Custom stylized image sets, one-click video creation with beat sync.</p>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8">
@@ -527,14 +527,14 @@ const BeatSyncPage: React.FC = () => {
                     <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 space-y-6 backdrop-blur-sm">
                         {/* Step 1 */}
                         <div>
-                            <h3 className="text-xl font-bold text-white mb-3">1. 上传您的图片</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">1. Upload Your Image</h3>
                             <div className="h-48 w-full border-2 border-dashed border-gray-600 rounded-lg flex items-center justify-center bg-gray-900/50 cursor-pointer hover:border-blue-500 transition-colors" onClick={() => document.getElementById('beatsync-upload')?.click()}>
                                 {uploadedImagePreview ? (
                                     <img src={uploadedImagePreview} alt="upload preview" className="max-h-full max-w-full object-contain"/>
                                 ) : (
                                     <div className="text-center text-gray-400">
                                         <UploadIcon className="w-10 h-10 mx-auto" />
-                                        <p className="mt-2 text-sm">点击或拖拽上传</p>
+                                        <p className="mt-2 text-sm">Click or drag to upload</p>
                                     </div>
                                 )}
                             </div>
@@ -543,7 +543,7 @@ const BeatSyncPage: React.FC = () => {
                         
                         {/* Step 2 */}
                         <div>
-                            <h3 className="text-xl font-bold text-white mb-3">2. 选择节拍</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">2. Choose Beat</h3>
                              <div className="space-y-2">
                                 {MUSIC_TRACKS.map(track => (
                                     <div key={track.name} className={`flex items-center p-3 rounded-lg cursor-pointer transition-all ${selectedMusicUrl === track.url ? 'bg-blue-600/30 ring-2 ring-blue-500' : 'bg-gray-700 hover:bg-gray-600'}`} onClick={() => setSelectedMusicUrl(track.url)}>
@@ -563,7 +563,7 @@ const BeatSyncPage: React.FC = () => {
                                 )}
                                 <button onClick={() => document.getElementById('music-upload')?.click()} className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors text-gray-300">
                                     <UploadIcon className="w-5 h-5"/>
-                                    <span>上传您自己的音乐</span>
+                                    <span>Upload Your Own Music</span>
                                 </button>
                                 <input id="music-upload" type="file" className="hidden" accept="audio/*" onChange={(e) => handleMusicFileChange(e.target.files)} />
 
@@ -573,11 +573,11 @@ const BeatSyncPage: React.FC = () => {
 
                         {/* Step 3 */}
                         <div>
-                            <h3 className="text-xl font-bold text-white mb-3">3. 选择风格</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">3. Choose Styles</h3>
                              <div className="flex gap-2 mb-4">
                                 {[6, 8, 10].map(count => (
                                     <button key={count} onClick={() => setImageCount(count as 6 | 8 | 10)} disabled={isGenerating} className={`flex-1 py-2 rounded-md font-semibold transition-all ${imageCount === count ? 'bg-blue-600 text-white' : 'bg-gray-700 hover:bg-gray-600 text-gray-300'}`}>
-                                        {count} 张图
+                                        {count} Images
                                     </button>
                                 ))}
                             </div>
@@ -585,7 +585,7 @@ const BeatSyncPage: React.FC = () => {
                                 {stylePrompts.map((prompt, index) => (
                                     <div key={index} className="bg-gray-700/50 rounded-lg">
                                         <button className="w-full flex justify-between items-center p-3 text-left" onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}>
-                                            <span className="font-semibold text-gray-200 truncate pr-2">风格 {index+1}：{prompt}</span>
+                                            <span className="font-semibold text-gray-200 truncate pr-2">Style {index+1}: {prompt}</span>
                                             <ChevronDownIcon className={`w-5 h-5 text-gray-400 transition-transform ${activeAccordion === index ? 'rotate-180' : ''}`} />
                                         </button>
                                         {activeAccordion === index && (
@@ -607,7 +607,7 @@ const BeatSyncPage: React.FC = () => {
                         
                         {/* Step 4 */}
                         <div>
-                            <h3 className="text-xl font-bold text-white mb-3">4. 选择过渡效果</h3>
+                            <h3 className="text-xl font-bold text-white mb-3">4. Choose Transition Effect</h3>
                             <div className="relative">
                                 <select
                                     value={transitionStyle}
@@ -615,10 +615,10 @@ const BeatSyncPage: React.FC = () => {
                                     disabled={isGenerating}
                                     className="w-full appearance-none bg-gray-700 border border-gray-600 text-white py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-gray-600 focus:border-gray-500"
                                 >
-                                    <option value="ken-burns">Ken Burns 缩放</option>
-                                    <option value="shake">晃动切换</option>
-                                    <option value="flash">闪光切换</option>
-                                    <option value="slide">左右滑入</option>
+                                    <option value="ken-burns">Ken Burns Zoom</option>
+                                    <option value="shake">Shake Transition</option>
+                                    <option value="flash">Flash Transition</option>
+                                    <option value="slide">Slide Transition</option>
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                                     <ChevronDownIcon className="w-5 h-5" />
@@ -628,7 +628,7 @@ const BeatSyncPage: React.FC = () => {
 
 
                         <button onClick={handleGenerate} disabled={!uploadedImageFile || isGenerating} className="w-full py-4 text-lg font-bold text-white rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 hover:from-purple-500 hover:to-blue-400 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-blue-500/50">
-                            {isGenerating ? "生成中..." : "生成图片和视频"}
+                            {isGenerating ? "Generating..." : "Generate Images and Video"}
                         </button>
                     </div>
                 </div>
@@ -638,8 +638,8 @@ const BeatSyncPage: React.FC = () => {
                     <AnimatePresence mode="wait">
                         {appState === 'idle' && (
                             <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center text-gray-400">
-                                <p className="text-2xl font-semibold">您的视频将在此处显示</p>
-                                <p>请完成左侧步骤以开始</p>
+                                <p className="text-2xl font-semibold">Your video will appear here</p>
+                                <p>Please complete the steps on the left to begin</p>
                             </motion.div>
                         )}
                         {(appState === 'generating-images' || appState === 'generating-video') && (
@@ -647,8 +647,8 @@ const BeatSyncPage: React.FC = () => {
                                 {appState === 'generating-video' ? (
                                     <div className="text-center">
                                         <Spinner className="w-16 h-16 text-blue-400" />
-                                        <p className="text-xl font-semibold mt-4 text-gray-300">正在合成视频...</p>
-                                        <p className="text-sm text-gray-400">这可能需要一点时间</p>
+                                        <p className="text-xl font-semibold mt-4 text-gray-300">Composing video...</p>
+                                        <p className="text-sm text-gray-400">This may take a moment</p>
                                     </div>
                                 ) : (
                                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
@@ -656,7 +656,7 @@ const BeatSyncPage: React.FC = () => {
                                             <motion.div key={index} className="aspect-square bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: parseInt(index) * 0.1}}>
                                                 {img.status === 'pending' && <Spinner className="w-8 h-8 text-gray-500"/>}
                                                 {img.status === 'done' && img.url && <img src={img.url} className="w-full h-full object-cover"/>}
-                                                {img.status === 'error' && <div className="text-center p-2 text-red-400 text-xs">失败</div>}
+                                                {img.status === 'error' && <div className="text-center p-2 text-red-400 text-xs">Failed</div>}
                                             </motion.div>
                                         ))}
                                     </div>
@@ -669,18 +669,18 @@ const BeatSyncPage: React.FC = () => {
                                 <div className="flex items-center justify-center gap-4">
                                     <a href={videoUrl} download="beatsync-video.webm" className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-500 transition-colors">
                                         <DownloadIcon className="w-6 h-6"/>
-                                        下载视频
+                                        Download Video
                                     </a>
                                      <button onClick={handleRegenerateVideo} disabled={isGenerating || !hasSuccessfulImages} className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed">
                                         <RefreshIcon className="w-6 h-6"/>
-                                        重新生成视频
+                                        Regenerate Video
                                     </button>
                                 </div>
                             </motion.div>
                         )}
                         {appState === 'error' && error && (
                             <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center text-red-400 bg-red-900/50 p-6 rounded-lg">
-                                <p className="text-xl font-bold">发生错误</p>
+                                <p className="text-xl font-bold">An Error Occurred</p>
                                 <p>{error}</p>
                             </motion.div>
                         )}

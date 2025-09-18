@@ -152,14 +152,14 @@ const TemplateDisplayPage: React.FC<TemplateDisplayPageProps> = ({ template, onB
                       <Spinner className="w-12 h-12 text-blue-400" />
                   ) : error && !afterImageUrl ? ( // Only show error if final gen failed, not if preview is fine
                       <div className="p-4 text-center text-red-400">
-                          <p className="font-bold">生成失败</p>
+                          <p className="font-bold">Generation Failed</p>
                           <p className="text-xs mt-1">{error}</p>
                       </div>
                   ) : afterImageUrl ? (
                       <motion.img
                           key="after-generated"
                           src={afterImageUrl}
-                          alt="AI 生成效果"
+                          alt="AI Generated Effect"
                           className="w-full h-full object-contain"
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -169,7 +169,7 @@ const TemplateDisplayPage: React.FC<TemplateDisplayPageProps> = ({ template, onB
                       <motion.img
                           key="after-preview"
                           src={afterPreviewUrl}
-                          alt="效果预览"
+                          alt="Effect Preview"
                           className="w-full h-full object-contain"
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -186,21 +186,21 @@ const TemplateDisplayPage: React.FC<TemplateDisplayPageProps> = ({ template, onB
                       className="mt-1 inline-flex items-center gap-3 px-6 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-500 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
                   >
                       <PaintBrushIcon className="w-6 h-6"/>
-                      {error ? '重试生成' : '生成来看看实际效果'}
+                      {error ? 'Retry Generation' : 'Generate to See Actual Effect'}
                   </button>
               )}
           </div>
         </div>
 
         <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-4 mb-8">
-          <p className="text-sm text-gray-400 font-semibold mb-2">所使用的提示词:</p>
+          <p className="text-sm text-gray-400 font-semibold mb-2">Prompt used:</p>
           <div className="relative">
               <code className="block w-full text-gray-300 bg-gray-900/50 p-3 pr-12 rounded-md text-sm whitespace-pre-wrap">{template.prompt}</code>
               <button
                   onClick={handleCopyPrompt}
                   className="absolute top-3 right-3 p-1.5 rounded-md bg-gray-700/50 text-gray-300 hover:bg-gray-700 hover:text-white transition-all"
-                  title={copyStatus === 'copied' ? '已复制!' : '复制提示词'}
-                  aria-label="复制提示词"
+                  title={copyStatus === 'copied' ? 'Copied!' : 'Copy Prompt'}
+                  aria-label="Copy Prompt"
               >
                   {copyStatus === 'copied' ? (
                       <CheckIcon className="w-5 h-5 text-green-400" />
@@ -216,13 +216,13 @@ const TemplateDisplayPage: React.FC<TemplateDisplayPageProps> = ({ template, onB
             onClick={onBack}
             className="w-full sm:w-auto px-8 py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600 transition-colors"
           >
-            返回
+            Back
           </button>
           <button
             onClick={() => onUseInEditor(template)}
             className="w-full sm:w-auto px-8 py-3 bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner"
           >
-            复制提示词并上传图片来改图
+            Copy Prompt and Upload Image to Edit
           </button>
         </div>
       </div>

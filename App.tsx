@@ -88,13 +88,13 @@ const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 type Tab = 'retouch' | 'adjust' | 'filters' | 'crop' | 'fusion' | 'texture' | 'erase';
 
 const tabNames: Record<Tab, string> = {
-  adjust: '调整',
-  filters: '滤镜',
-  texture: '纹理',
-  erase: '抠图',
-  crop: '裁剪',
-  fusion: '合成',
-  retouch: '修饰',
+  adjust: 'Adjust',
+  filters: 'Filters',
+  texture: 'Texture',
+  erase: 'Remove BG',
+  crop: 'Crop',
+  fusion: 'Fusion',
+  retouch: 'Retouch',
 };
 
 const TABS: Tab[] = ['adjust', 'filters', 'texture', 'erase', 'crop', 'fusion', 'retouch'];
@@ -184,28 +184,24 @@ const EditorView: React.FC<{
         setLastAction(null);
         setError(null);
         
-        // Set loading flags
         setIsTemplateLoading(true);
         setIsLoading(true);
 
         try {
-            // Perform the async operation
             const response = await fetch(initialState.baseImageUrl);
             if (!response.ok) {
-                throw new Error(`无法加载模板图片 (status: ${response.status})`);
+                throw new Error(`Unable to load template image (status: ${response.status})`);
             }
             const blob = await response.blob();
             const fileName = initialState.baseImageUrl.split('/').pop() || 'template.png';
             const file = new File([blob], fileName, { type: blob.type });
 
-            // Update state with the result. This will trigger the second useEffect.
             setHistory([file]);
             setHistoryIndex(0);
             setActiveTab('adjust');
             setInitialAdjustPrompt(initialState.prompt);
         } catch (e) {
-            // Update state with the error. This will also trigger the second useEffect.
-            const errorMessage = e instanceof Error ? e.message : '加载模板时出错。';
+            const errorMessage = e instanceof Error ? e.message : 'Error loading template.';
             setError(errorMessage);
         }
     };
@@ -250,7 +246,7 @@ const EditorView: React.FC<{
     if (files && files.length > 0) {
       const file = files[0];
       if (file.size > MAX_FILE_SIZE_BYTES) {
-        setError(`图片文件大小不能超过 ${MAX_FILE_SIZE_MB}MB。请选择一个较小的文件。`);
+        setError(`Image file size cannot exceed ${MAX_FILE_SIZE_MB}MB. Please select a smaller file.`);
         return;
       }
       setHistory([file]);
@@ -274,7 +270,7 @@ const EditorView: React.FC<{
         onImageGenerated(dataUrl);
     } catch(e) {
         console.error("Failed to process generated image", e);
-        setError(e instanceof Error ? e.message : '处理生成图像时出错');
+        setError(e instanceof Error ? e.message : 'Error processing generated image');
     } finally {
         setIsLoading(false);
     }
@@ -395,7 +391,7 @@ const EditorView: React.FC<{
             setLastAction(null); // Crop is not a generative action we can re-run
         } catch(e) {
             console.error("Cropping failed", e);
-            setError(e instanceof Error ? e.message : '裁剪图片时出错');
+            setError(e instanceof Error ? e.message : 'Error cropping image');
         } finally {
             setIsLoading(false);
         }
@@ -465,8 +461,8 @@ const EditorView: React.FC<{
         onClick={handleStartOver}
         disabled={isLoading}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="新图片"
-        title="新图片"
+        aria-label="New Image"
+        title="New Image"
       >
         <NewFileIcon className="w-6 h-6" />
       </button>
@@ -474,8 +470,8 @@ const EditorView: React.FC<{
         onClick={handleUndo}
         disabled={historyIndex <= 0 || isLoading}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="撤销"
-        title="撤销 (Ctrl+Z)"
+        aria-label="Undo"
+        title="Undo (Ctrl+Z)"
       >
         <UndoIcon className="w-6 h-6" />
       </button>
@@ -483,8 +479,8 @@ const EditorView: React.FC<{
         onClick={handleRedo}
         disabled={historyIndex >= history.length - 1 || isLoading}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="重做"
-        title="重做 (Ctrl+Y)"
+        aria-label="Redo"
+        title="Redo (Ctrl+Y)"
       >
         <RedoIcon className="w-6 h-6" />
       </button>
@@ -492,8 +488,8 @@ const EditorView: React.FC<{
         onClick={handleRegenerate}
         disabled={!lastAction || historyIndex < 1 || isLoading}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="重新生成"
-        title="重新生成"
+        aria-label="Regenerate"
+        title="Regenerate"
       >
         <RefreshIcon className="w-6 h-6" />
       </button>
@@ -505,8 +501,8 @@ const EditorView: React.FC<{
         onTouchEnd={() => setIsComparing(false)}
         disabled={isLoading || history.length < 2}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="按住对比原图"
-        title="按住对比原图"
+        aria-label="Hold to compare original"
+        title="Hold to compare original"
       >
         <EyeIcon className="w-6 h-6" />
       </button>
@@ -514,8 +510,8 @@ const EditorView: React.FC<{
         onClick={handleSaveImage}
         disabled={isLoading || !currentImageFile}
         className="p-3 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 transition-all active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
-        aria-label="保存图片"
-        title="保存图片 (Ctrl+S)"
+        aria-label="Save Image"
+        title="Save Image (Ctrl+S)"
       >
         <DownloadIcon className="w-6 h-6" />
       </button>
@@ -526,7 +522,7 @@ const EditorView: React.FC<{
     return (
         <div className="w-full h-full flex flex-col items-center justify-center gap-4 animate-fade-in">
             <Spinner className="h-16 w-16 text-blue-400" />
-            <p className="mt-4 text-lg text-gray-300 font-semibold">正在加载模板...</p>
+            <p className="mt-4 text-lg text-gray-300 font-semibold">Loading template...</p>
         </div>
     );
   }
@@ -535,7 +531,7 @@ const EditorView: React.FC<{
     <>
       {error && !currentImageFile && (
         <div className="w-full max-w-4xl mx-auto bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg relative text-center mb-4 animate-fade-in" role="alert">
-          <strong className="font-bold">错误：</strong>
+          <strong className="font-bold">Error:</strong>
           <span className="block sm:inline ml-2">{error}</span>
         </div>
       )}
@@ -550,7 +546,7 @@ const EditorView: React.FC<{
         <div className="w-full max-w-7xl flex flex-col items-center gap-6 animate-fade-in">
           {error && (
             <div className="w-full max-w-4xl mx-auto bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg relative text-center mb-0 animate-fade-in" role="alert">
-              <strong className="font-bold">错误：</strong>
+              <strong className="font-bold">Error:</strong>
               <span className="block sm:inline ml-2">{error}</span>
             </div>
            )}
@@ -559,7 +555,7 @@ const EditorView: React.FC<{
                 {isLoading && (
                   <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center z-20 backdrop-blur-sm">
                     <Spinner className="h-16 w-16 text-blue-400" />
-                    <p className="mt-4 text-lg text-gray-300 font-semibold animate-pulse">AI 正在创作中...</p>
+                    <p className="mt-4 text-lg text-gray-300 font-semibold animate-pulse">AI is creating...</p>
                   </div>
                 )}
                 
@@ -576,7 +572,7 @@ const EditorView: React.FC<{
                       <img
                         ref={imgRef}
                         src={displaySrc}
-                        alt="用户上传的内容"
+                        alt="User uploaded content"
                         className={`max-w-full max-h-[65vh] w-auto h-auto mx-auto block transition-opacity duration-300 ${isComparing ? 'opacity-80' : ''}`}
                         onClick={handleImageClick}
                         style={{ cursor: activeTab === 'retouch' ? 'crosshair' : 'default' }}
@@ -597,7 +593,7 @@ const EditorView: React.FC<{
                 ) : !isLoading && <div className="h-[65vh] flex items-center justify-center"><Spinner/></div>}
                 {isComparing && (
                     <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm font-semibold z-10">
-                        正在对比原图
+                        Comparing with original
                     </div>
                 )}
             </div>
@@ -634,14 +630,14 @@ const EditorView: React.FC<{
             <div className="w-full">
               {activeTab === 'retouch' && (
                   <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col items-center gap-4 animate-fade-in backdrop-blur-sm">
-                      <h3 className="text-lg font-semibold text-gray-300">智能修饰</h3>
-                      <p className="text-sm text-gray-400 -mt-2">在图像上点击一个点，然后描述您想做的更改。</p>
+                      <h3 className="text-lg font-semibold text-gray-300">Smart Retouch</h3>
+                      <p className="text-sm text-gray-400 -mt-2">Click a point on the image, then describe the changes you want to make.</p>
                       <div className="w-full flex gap-2">
                          <input
                               type="text"
                               value={retouchPrompt}
                               onChange={(e) => setRetouchPrompt(e.target.value)}
-                              placeholder="例如，“移除这个物体”或“把衬衫改成红色”"
+                              placeholder="e.g., 'remove this object' or 'change the shirt to red'"
                               className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
                               disabled={isLoading}
                           />
@@ -650,7 +646,7 @@ const EditorView: React.FC<{
                               className="bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
                               disabled={isLoading || !retouchPrompt.trim() || !retouchHotspot}
                           >
-                              应用
+                              Apply
                           </button>
                       </div>
                   </div>

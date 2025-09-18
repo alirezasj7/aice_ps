@@ -52,16 +52,17 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in" onClick={onClose} aria-modal="true" role="dialog">
       <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl shadow-blue-500/10 w-full max-w-lg m-4 p-6 text-gray-200 relative" onClick={e => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="关闭设置">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="Close Settings">
           <XMarkIcon className="w-6 h-6" />
         </button>
 
-        <h2 className="text-2xl font-bold mb-4">API 设置</h2>
+        <h2 className="text-2xl font-bold mb-4">API Settings</h2>
         
         <div className="text-yellow-300/80 bg-yellow-900/20 border border-yellow-700/50 p-3 rounded-lg text-sm mb-4">
-          <b>请注意：</b>使用您自己的 Google Gemini API 密钥将会产生费用。如果留空，应用将尝试使用系统配置的免费 API。
+          <b>Please note:</b> Using your own Google Gemini API key will incur charges. If left empty, the app will try to use the system-configured free API.
         </div>
         <div className="text-cyan-300/80 bg-cyan-900/20 border border-cyan-700/50 p-3 rounded-lg text-sm mb-6">
-            <b>通知：</b>我们提供高性价比且稳定的 Nano Banana 图片生成 API，详情请访问 <a href="https://cnb.build/no.1/api/-/issues/2" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-cyan-200">极具性价比API平台</a>。
+            <b>Notice:</b> We provide cost-effective and stable Nano Banana image generation API. For details, please visit <a href="https://cnb.build/no.1/api/-/issues/2" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-cyan-200">Cost-Effective API Platform</a>.
         </div>
 
         <div className="flex flex-col gap-4">
@@ -77,14 +78,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
                         setApiKey(e.target.value);
                         setIsSaved(false);
                     }}
-                    placeholder="在此处粘贴您的 API 密钥"
+                    placeholder="Paste your API key here"
                     className="bg-gray-900 border border-gray-600 text-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
                 />
             </div>
             
             <div className="flex flex-col gap-2">
                 <label htmlFor="base-url-input" className="font-semibold text-gray-300">
-                    API Base URL (可选)
+                    API Base URL (Optional)
                 </label>
                 <input
                     id="base-url-input"
@@ -94,7 +95,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
                         setBaseUrl(e.target.value);
                         setIsSaved(false);
                     }}
-                    placeholder="例如: https://apis.kuai.host/"
+                    placeholder="e.g.: https://apis.kuai.host/"
                     className="bg-gray-900 border border-gray-600 text-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
                 />
             </div>
@@ -105,14 +106,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, onSave }
                 onClick={handleClear}
                 className="flex-1 bg-gray-700/50 text-gray-300 font-bold py-3 px-6 rounded-lg transition-colors hover:bg-gray-700/80 active:scale-95"
             >
-                清除
+                Clear
             </button>
             <button
                 onClick={handleSave}
                 className="flex-1 bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed"
                 disabled={isSaved}
             >
-                {isSaved ? '已保存！' : '保存设置'}
+                {isSaved ? 'Saved!' : 'Save Settings'}
             </button>
         </div>
       </div>

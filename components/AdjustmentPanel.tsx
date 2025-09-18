@@ -33,10 +33,10 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
   }, [initialPrompt]);
 
   const presets: Preset[] = [
-    { name: '背景虚化', prompt: 'Apply a realistic depth-of-field effect, making the background blurry while keeping the main subject in sharp focus.' },
-    { name: '增强细节', prompt: 'Slightly enhance the sharpness and details of the image without making it look unnatural.' },
-    { name: '暖色调光', prompt: 'Adjust the color temperature to give the image warmer, golden-hour style lighting.' },
-    { name: '影棚光效', prompt: 'Add dramatic, professional studio lighting to the main subject.' },
+    { name: 'Blur Background', prompt: 'Apply a realistic depth-of-field effect, making the background blurry while keeping the main subject in sharp focus.' },
+    { name: 'Enhance Details', prompt: 'Slightly enhance the sharpness and details of the image without making it look unnatural.' },
+    { name: 'Warm Lighting', prompt: 'Adjust the color temperature to give the image warmer, golden-hour style lighting.' },
+    { name: 'Studio Lighting', prompt: 'Add dramatic, professional studio lighting to the main subject.' },
   ];
 
   const activePrompt = selectedPresetPrompt || customPrompt;
@@ -75,7 +75,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
   return (
     <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col gap-4 animate-fade-in backdrop-blur-sm">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-gray-300">应用专业级调整</h3>
+        <h3 className="text-lg font-semibold text-gray-300">Apply Professional Adjustments</h3>
         <button
             onClick={handleGetSuggestions}
             disabled={isLoading || isSuggesting}
@@ -84,12 +84,12 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
             {isSuggesting ? (
                 <>
                     <Spinner className="w-5 h-5" />
-                    <span>正在获取...</span>
+                    <span>Getting...</span>
                 </>
             ) : (
                 <>
                     <SparkleIcon className="w-5 h-5" />
-                    <span>获取灵感</span>
+                    <span>Get Inspiration</span>
                 </>
             )}
         </button>
@@ -102,7 +102,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
           aria-expanded={isPresetsVisible}
           aria-controls="adjustment-presets"
         >
-          <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">调整预设</h4>
+          <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">Adjustment Presets</h4>
           <ChevronDownIcon className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isPresetsVisible ? 'rotate-180' : ''}`} />
         </button>
       </div>
@@ -155,7 +155,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
         type="text"
         value={customPrompt}
         onChange={handleCustomChange}
-        placeholder="描述一项自定义调整（例如，“将背景更改为森林”）"
+        placeholder="Describe a custom adjustment (e.g., 'change background to forest')"
         className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
         disabled={isLoading}
       />
@@ -167,7 +167,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({ onApplyAdjustment, is
                 className="w-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
                 disabled={isLoading || !activePrompt.trim()}
             >
-                应用调整
+                Apply Adjustment
             </button>
         </div>
       )}

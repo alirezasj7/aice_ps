@@ -1,87 +1,87 @@
-# Aice PS - AI 图片编辑器
+# Aice PS - AI Image Editor
 
-Aice PS 是一款功能强大的网页版 AI 照片编辑器，利用 Google aistudio 的先进能力，让专业级的图像编辑和创作变得简单直观。用户可以通过简单的文本提示对图像进行修饰、应用创意滤镜、进行专业调整，甚至从零开始生成全新的图像。
+Aice PS is a powerful web-based AI photo editor that leverages Google AI Studio's advanced capabilities to make professional-level image editing and creation simple and intuitive. Users can retouch images, apply creative filters, make professional adjustments, and even generate entirely new images from scratch through simple text prompts.
 
-![Aice PS 界面截图](public/images/show.jpg)
+![Aice PS Interface Screenshot](public/images/show.jpg)
 
-## 注意，调用 gemini api key 是需要收费的。但直接调用环境变量中的api是免费的。[推荐可大方使用的极具性价比API平台 2分钱一张，高清1毛2](https://nb2.kuai.host/)
+## Note: Using Gemini API key incurs charges. However, calling the API directly from environment variables is free. [Recommended cost-effective API platform - 2¢ per image, HD 12¢](https://nb2.kuai.host/)
 
-### [AiStudio 【NanoBanana APP】](https://ai.studio/apps/drive/1JSVTWc7Pe1GfLLrQcBWPZF_yH_80xUGg) 
+### [AI Studio 【NanoBanana APP】](https://ai.studio/apps/drive/1JSVTWc7Pe1GfLLrQcBWPZF_yH_80xUGg) 
 
-> 登录了google aistudio 的可以直接打开上面 app 使用。完全免费
+> If you're logged into Google AI Studio, you can directly open the app above. Completely free.
 
-### [【可自部署版本 DEMO】https://nb2.kuai.host/](https://nb2.kuai.host/)
+### [【Self-deployable Version DEMO】https://nb2.kuai.host/](https://nb2.kuai.host/)
 
-> #### 自部署版本，国内可直接用，已经配套了超值的香蕉API，推荐使用。
+> #### Self-deployable version, directly usable in China, comes with cost-effective Banana API, recommended for use.
 
-> #### 请大家谨慎使用自己的gemini api key。[推荐可大方使用的极具性价比API平台](https://cnb.build/no.1/api/-/issues/2)
+> #### Please use your own Gemini API key with caution. [Recommended cost-effective API platform](https://cnb.build/no.1/api/-/issues/2)
 
- [【视频教程】](https://www.bilibili.com/video/BV1hwahzNEhC/)  [【交流群】](https://cnb.cool/fuliai/comfyui/-/issues/11) 
+ [【Video Tutorial】](https://www.bilibili.com/video/BV1hwahzNEhC/)  [【Discussion Group】](https://cnb.cool/fuliai/comfyui/-/issues/11) 
 
-## 视频中提示词请查看APP中的【NB提示词库】
+## For prompts used in the video, please check the【Template Library】in the APP
 
-## ✨ 主要功能
+## ✨ Main Features
 
-Aice PS 结合了多种尖端 AI 能力，为您提供一站式的创意图片与视频解决方案：
+Aice PS combines multiple cutting-edge AI capabilities to provide you with a one-stop creative image and video solution:
 
--   **🚀 AI 图像生成**: 输入任意文本描述，即可由 `Imagen 4` 模型创造出细节丰富、富有创意的高质量图片，并支持多种宽高比。
--   **✍️ 智能修饰 (局部编辑)**: 在图片上轻松点击指定位置，通过简单的文字指令（如“移除这个物体”、“把衬衫变成红色”）进行精准、无缝的局部修改。
--   **🎨 创意滤镜与专业调整**: 一键应用动漫、合成波、Lomo 等多种艺术风格滤镜，或进行背景虚化、增强细节、调整光效等专业级图像调整。
--   **💡 AI 灵感建议**: 不确定从何下手？AI 会智能分析您的图片，并为您量身推荐最合适的滤镜、调整和纹理效果，激发您的创作灵感。
--   **🧩 智能合成**: 上传多张图片，通过一句话描述，即可将不同元素（如人物、背景、风格）无缝地融合在一起，创造出全新的合成图像。
--   **🧱 纹理叠加**: 为图片添加各种逼真的创意纹理，如裂纹漆、木纹、金属拉丝等，瞬间提升画面质感。
--   **✂️ 一键抠图**: 强大的人工智能可自动识别并移除图片背景，一键生成带透明通道的 PNG 图像，非常适合设计和合成。
--   **🕰️ Past Forward (时空穿越)**: 上传一张肖像照，AI 将带您穿越时空，生成您在 1950s 至 2000s 各个年代的逼真样貌。
--   **🎵 音画志 (BeatSync)**: 上传一张图片和一段音乐，AI 会自动生成多种风格化图集，并根据音乐节拍一键生成带有酷炫转场效果的视频短片。
--   **📚 NB 提示词库**: 内置一个可搜索、分页的模板库，提供丰富的创意起点。点击模板即可加载预设图片和提示词，轻松开始您的创作之旅。
--   **🛠️ 基础编辑套件**: 提供无限制的裁剪、撤销/重做、实时对比原图、保存和下载等基础功能，满足您的日常编辑需求。
+-   **🚀 AI Image Generation**: Enter any text description to create detail-rich, creative high-quality images with the `Imagen 4` model, supporting multiple aspect ratios.
+-   **✍️ Smart Retouch (Local Editing)**: Easily click on specific locations in images and make precise, seamless local modifications through simple text commands (like "remove this object" or "change the shirt to red").
+-   **🎨 Creative Filters & Professional Adjustments**: One-click application of various artistic style filters like anime, synthwave, Lomo, or professional image adjustments like background blur, detail enhancement, and lighting effects.
+-   **💡 AI Inspiration Suggestions**: Not sure where to start? AI intelligently analyzes your images and recommends the most suitable filters, adjustments, and texture effects tailored for you, sparking your creative inspiration.
+-   **🧩 Smart Fusion**: Upload multiple images and describe in one sentence how to seamlessly blend different elements (like characters, backgrounds, styles) together to create entirely new composite images.
+-   **🧱 Texture Overlay**: Add various realistic creative textures to images, such as cracked paint, wood grain, brushed metal, etc., instantly enhancing image quality.
+-   **✂️ One-Click Background Removal**: Powerful AI automatically identifies and removes image backgrounds, generating PNG images with transparent channels in one click, perfect for design and compositing.
+-   **🕰️ Past Forward (Time Travel)**: Upload a portrait photo, and AI will take you through time, generating realistic appearances of you from the 1950s to 2000s across different decades.
+-   **🎵 BeatSync**: Upload an image and a piece of music, AI will automatically generate multiple stylized image sets and create video clips with cool transition effects synced to the music beat in one click.
+-   **📚 Template Library**: Built-in searchable, paginated template library providing rich creative starting points. Click on templates to load preset images and prompts, easily beginning your creative journey.
+-   **🛠️ Basic Editing Suite**: Provides unlimited cropping, undo/redo, real-time original image comparison, save and download functions to meet your daily editing needs.
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
-- **前端**: React 19 (通过 esm.sh 加载，无构建步骤)
-- **语言**: TypeScript
-- **AI 模型**: Google Gemini API (`gemini-2.5-flash-image-preview`, `imagen-4.0-generate-001`, `gemini-2.5-flash`)
-- **样式**: Tailwind CSS (通过 CDN)
-- **组件库**: `react-image-crop`
+- **Frontend**: React 19 (loaded via esm.sh, no build step)
+- **Language**: TypeScript
+- **AI Models**: Google Gemini API (`gemini-2.5-flash-image-preview`, `imagen-4.0-generate-001`, `gemini-2.5-flash`)
+- **Styling**: Tailwind CSS (via CDN)
+- **Component Library**: `react-image-crop`
 
-## 🎨 核心 AI 模型介绍
+## 🎨 Core AI Model Introduction
 
-Aice PS 的强大功能由 Google 最先进的一系列生成式 AI 模型驱动，每个模型都在特定任务中发挥着关键作用。
+Aice PS's powerful features are driven by Google's most advanced series of generative AI models, each playing a key role in specific tasks.
 
 ### Gemini 2.5 Flash Image (`gemini-2.5-flash-image-preview`)
 
-这款模型是 Aice PS 所有核心**图像编辑功能**的引擎，也被称为 "Nano Banana"。它不仅仅是一个图像生成器，更是一个上下文编辑器，能够深度理解图像内容并根据自然语言指令进行精确操作。
+This model is the engine behind all core **image editing features** of Aice PS, also known as "Nano Banana". It's not just an image generator, but a contextual editor that can deeply understand image content and perform precise operations based on natural language instructions.
 
-其主要优势包括：
+Its main advantages include:
 
--   **高级推理与上下文理解**: 模型能像人类一样“思考”用户的编辑意图。例如，当要求“将一个在烤箱里烤了4天的千层面”可视化时，它会生成一个烧焦的、冒着烟的千层面，而不是一个完美的成品，展现了其卓越的逻辑推理能力。
--   **卓越的角色与场景一致性**: 在进行多次编辑或生成系列图片时，能够保持主体角色和场景风格的高度一致性。这对于故事叙述、视频镜头生成或品牌资产设计至关重要。
--   **精确的局部编辑**: 用户可以在图像上指定一个点，然后用自然语言描述修改内容（例如，“移除这个人”或“给这件衬衫添加条纹”），模型会进行无缝、逼真的修改，同时保持图像其他部分不变。
--   **文本与细节处理**: 能够识别并修改图像中的文字，例如更改报纸标题或产品标签，同时保持原始字体和风格。它还能修复旧照片、消除运动模糊，并保留关键细节。
--   **多图像融合**: 模型可以理解并融合多张输入图片，例如将一个物体放入新场景，或将一个房间的风格替换为另一张图的纹理。
+-   **Advanced Reasoning & Contextual Understanding**: The model can "think" about user editing intentions like humans. For example, when asked to visualize "a lasagna that has been baking in the oven for 4 days," it generates a burnt, smoking lasagna rather than a perfect finished product, demonstrating its excellent logical reasoning capabilities.
+-   **Excellent Character & Scene Consistency**: When performing multiple edits or generating series of images, it maintains high consistency in main characters and scene styles. This is crucial for storytelling, video shot generation, or brand asset design.
+-   **Precise Local Editing**: Users can specify a point on an image and describe modifications in natural language (e.g., "remove this person" or "add stripes to this shirt"), and the model performs seamless, realistic modifications while keeping other parts of the image unchanged.
+-   **Text & Detail Processing**: Can recognize and modify text within images, such as changing newspaper headlines or product labels while maintaining original fonts and styles. It can also restore old photos, eliminate motion blur, and preserve key details.
+-   **Multi-image Fusion**: The model can understand and fuse multiple input images, such as placing an object into a new scene or replacing a room's style with textures from another image.
 
-## ⚠️ API 密钥使用说明
-请注意，如果您在设置中提供了自己的 Google Gemini API 密钥，通过该密钥进行的 API 调用将会**产生费用**。如果将设置留空，应用会尝试使用部署时在环境变量中配置的 API 密钥（该密钥可能是免费的，也可能是您自己付费的）。请根据您的使用情况谨慎配置。
+## ⚠️ API Key Usage Instructions
+Please note that if you provide your own Google Gemini API key in settings, API calls made through that key will **incur charges**. If left empty, the app will attempt to use the API key configured in environment variables during deployment (which may be free or paid by yourself). Please configure carefully based on your usage situation.
 
 ### TODO
-- [x] Google Aistudio APP，相对完善且好用的可免费使用Nano Banana的APP
-- [x] 支持多图融合
-- [x] 一张图片生成年轻及年老时的一整套图片出来 (Past Forward)
-- [x] 增加音画志功能页面：风格化图集，随节拍一键成片。
-- [x] 增加粘贴传图功能，在首页中粘贴图片就自动上传。
-- [x] 增加模板功能 (NB 提示词库)
-- [x] 提示词集中营 (NB 提示词库)
-- [x] 重新支持Gemini API，大家也可以自行部署并使用兼容gemini api的API来使用。[推荐可大方使用的极具性价比API平台，源头价格更低](https://cnb.build/no.1/api/-/issues/2)
-- [x] 修正图片上传限制过小的问题
-- [x] 3图融合升级为4图融合。
-- [] 持续增加提示词模板中(进行中)
-- [] 芝士香蕉功能-计划中
-- [] 接入 第三方平台API
-- [] ……
+- [x] Google AI Studio APP, relatively complete and user-friendly free Nano Banana APP
+- [x] Support multi-image fusion
+- [x] Generate complete sets of young and old versions from one image (Past Forward)
+- [x] Add BeatSync feature page: stylized image sets, one-click video creation with beat sync
+- [x] Add paste image upload feature, automatically upload when pasting images on homepage
+- [x] Add template feature (Template Library)
+- [x] Prompt collection center (Template Library)
+- [x] Re-support Gemini API, everyone can self-deploy and use Gemini API-compatible APIs. [Recommended cost-effective API platform with lower source prices](https://cnb.build/no.1/api/-/issues/2)
+- [x] Fix image upload size limit being too small
+- [x] Upgrade 3-image fusion to 4-image fusion
+- [] Continuously adding prompt templates (in progress)
+- [] Cheese Banana feature - planned
+- [] Integration with third-party platform APIs
+- [] ...
 
 
-###  [【视频教程】](https://www.bilibili.com/video/BV1hwahzNEhC/)  [【交流群】](https://cnb.cool/fuliai/comfyui/-/issues/11) 
+###  [【Video Tutorial】](https://www.bilibili.com/video/BV1hwahzNEhC/)  [【Discussion Group】](https://cnb.cool/fuliai/comfyui/-/issues/11) 
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 [Apache-2.0](./LICENSE) 许可证。
+This project is licensed under [Apache-2.0](./LICENSE).

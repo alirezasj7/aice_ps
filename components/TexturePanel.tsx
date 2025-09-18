@@ -25,10 +25,10 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
   const [isPresetsVisible, setIsPresetsVisible] = useState(true);
 
   const presets: Preset[] = [
-    { name: '裂纹漆', prompt: 'Apply a cracked and peeling paint texture over the image, revealing a darker layer underneath.' },
-    { name: '织物', prompt: 'Overlay a realistic woven fabric texture, like canvas or burlap, across the entire image.' },
-    { name: '木纹', prompt: 'Apply a rich, dark wood grain texture to the image, following the contours of the subjects.' },
-    { name: '金属拉丝', prompt: 'Give the image a brushed metal texture, with subtle horizontal streaks and a metallic sheen.' },
+    { name: 'Cracked Paint', prompt: 'Apply a cracked and peeling paint texture over the image, revealing a darker layer underneath.' },
+    { name: 'Fabric', prompt: 'Overlay a realistic woven fabric texture, like canvas or burlap, across the entire image.' },
+    { name: 'Wood Grain', prompt: 'Apply a rich, dark wood grain texture to the image, following the contours of the subjects.' },
+    { name: 'Brushed Metal', prompt: 'Give the image a brushed metal texture, with subtle horizontal streaks and a metallic sheen.' },
   ];
   
   const activePrompt = selectedPresetPrompt || customPrompt;
@@ -67,7 +67,7 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
   return (
     <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col gap-4 animate-fade-in backdrop-blur-sm">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-gray-300">应用创意纹理</h3>
+        <h3 className="text-lg font-semibold text-gray-300">Apply Creative Textures</h3>
         <button
             onClick={handleGetSuggestions}
             disabled={isLoading || isSuggesting}
@@ -76,12 +76,12 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
             {isSuggesting ? (
                 <>
                     <Spinner className="w-5 h-5" />
-                    <span>正在获取...</span>
+                    <span>Getting...</span>
                 </>
             ) : (
                 <>
                     <SparkleIcon className="w-5 h-5" />
-                    <span>获取灵感</span>
+                    <span>Get Inspiration</span>
                 </>
             )}
         </button>
@@ -95,6 +95,7 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
           aria-controls="texture-presets"
         >
           <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">纹理预设</h4>
+          <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">Texture Presets</h4>
           <ChevronDownIcon className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isPresetsVisible ? 'rotate-180' : ''}`} />
         </button>
       </div>
@@ -140,6 +141,7 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
         </div>
         <div className="relative flex justify-center">
             <span className="bg-gray-800/50 px-2 text-sm text-gray-400">或</span>
+            <span className="bg-gray-800/50 px-2 text-sm text-gray-400">or</span>
         </div>
       </div>
 
@@ -147,7 +149,7 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
         type="text"
         value={customPrompt}
         onChange={handleCustomChange}
-        placeholder="描述一个自定义纹理（例如，“生锈的金属板效果”）"
+       placeholder="Describe a custom texture (e.g., 'rusty metal plate effect')"
         className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
         disabled={isLoading}
       />
@@ -159,7 +161,7 @@ const TexturePanel: React.FC<TexturePanelProps> = ({ onApplyTexture, isLoading, 
             className="w-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
             disabled={isLoading || !activePrompt.trim()}
           >
-            应用纹理
+           Apply Texture
           </button>
         </div>
       )}

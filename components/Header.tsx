@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ activeView, onViewChange, onOpenSetting
               <button onClick={() => onViewChange('beatsync')} className={`flex items-center gap-3 transition-colors p-2 -m-2 rounded-lg ${activeView === 'beatsync' ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}>
                 <FilmIcon className="w-6 h-6 text-purple-400" />
                 <h1 className="text-xl font-bold tracking-tight">
-                  音画志
+                  BeatSync
                 </h1>
               </button>
               
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ activeView, onViewChange, onOpenSetting
               <button onClick={() => onViewChange('template-library')} className={`flex items-center gap-3 transition-colors p-2 -m-2 rounded-lg ${activeView === 'template-library' ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}>
                 <TemplateLibraryIcon className="w-6 h-6 text-green-400" />
                 <h1 className="text-xl font-bold tracking-tight font-['Permanent_Marker']">
-                  NB 提示词库
+                  Template Library
                 </h1>
               </button>
 
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ activeView, onViewChange, onOpenSetting
               
               <a href="https://youtu.be/ZxjiZKnvjt4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 transition-colors p-2 -m-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10">
                 <h1 className="text-xl font-bold tracking-tight">
-                  【2分钱每张】国内可用超值API
+                  Affordable API - 2¢ per image
                 </h1>
               </a>
 
@@ -65,16 +65,16 @@ const Header: React.FC<HeaderProps> = ({ activeView, onViewChange, onOpenSetting
             <button
               onClick={onOpenHelp}
               className="p-2 text-gray-400 rounded-full hover:bg-white/10 hover:text-white transition-colors"
-              aria-label="帮助"
-              title="帮助"
+              aria-label="Help"
+              title="Help"
             >
               <QuestionMarkCircleIcon className="w-6 h-6" />
             </button>
             <button
               onClick={onOpenSettings}
               className="p-2 text-gray-400 rounded-full hover:bg-white/10 hover:text-white transition-colors"
-              aria-label="API 设置"
-              title="API 设置"
+              aria-label="API Settings"
+              title="API Settings"
             >
               <CogIcon className="w-6 h-6" />
             </button>

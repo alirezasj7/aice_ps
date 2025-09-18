@@ -42,7 +42,7 @@ const getBaseUrl = (): string | undefined => {
 const getGoogleAI = (): GoogleGenAI => {
     const apiKey = getApiKey();
     if (!apiKey) {
-        throw new Error("找不到 API 密钥。请在设置中输入您的密钥，或确保系统 API 密钥已在环境中正确设置。");
+        throw new Error("API key not found. Please enter your key in settings, or ensure the system API key is properly configured in the environment.");
     }
     const baseUrl = getBaseUrl();
     
@@ -61,7 +61,7 @@ const getGoogleAI = (): GoogleGenAI => {
         aiInstance = null; // Invalidate on failure
         lastUsedApiKey = null;
         lastUsedBaseUrl = null;
-        throw new Error(`初始化 AI 服务失败: ${e instanceof Error ? e.message : String(e)}`);
+        throw new Error(`Failed to initialize AI service: ${e instanceof Error ? e.message : String(e)}`);
       }
     }
 
@@ -71,20 +71,20 @@ const getGoogleAI = (): GoogleGenAI => {
 const handleApiError = (error: any, action: string): Error => {
     console.error(`API call for "${action}" failed:`, error);
     // Attempt to parse a meaningful message from the error object or string
-    let message = `在“${action}”期间发生错误: ${error.message || '未知通信错误'}`;
+    let message = `Error occurred during "${action}": ${error.message || 'Unknown communication error'}`;
     try {
       // Errors from the backend might be JSON strings
       const errorObj = JSON.parse(error.message);
       if (errorObj?.error?.message) {
          // Use the specific message from the API if available
-         message = `在“${action}”期间发生错误: ${errorObj.error.message}`;
+         message = `Error occurred during "${action}": ${errorObj.error.message}`;
       }
     } catch(e) {
       // It's not a JSON string, use the original message
       if (String(error.message).includes('API key not valid')) {
-          message = 'API 密钥无效。请检查您在设置中输入的密钥。';
+          message = 'API key is invalid. Please check the key you entered in settings.';
       } else if (String(error.message).includes('xhr error')) {
-           message = `与 AI 服务的通信失败。这可能是由网络问题或无效的 API 密钥引起的。`;
+           message = `Communication with AI service failed. This may be caused by network issues or an invalid API key.`;
       }
     }
 
@@ -224,6 +224,7 @@ const callImageEditingModel = async (parts: any[], action: string): Promise<stri
         }
 
         throw new Error('AI 未能返回预期的图片结果。');
+        throw new Error('AI failed to return expected image result.');
     } catch (e) {
         // Re-throw specific errors, otherwise wrap in a generic handler
         if (e instanceof Error && (e.message.includes("Model responded with text") || e.message.includes("AI did not return a valid result"))) {
@@ -251,27 +252,28 @@ export const generateImageFromText = async (prompt: string, aspectRatio: string)
             return `data:image/png;base64,${base64ImageBytes}`;
         }
         throw new Error('AI 未能生成图片。');
+        throw new Error('AI failed to generate image.');
     } catch (e) {
-        throw handleApiError(e, '生成图片');
+        throw handleApiError(e, 'generate image');
     }
 };
 
 export const generateEditedImage = async (imageFile: File, prompt: string, hotspot: { x: number; y: number }): Promise<string> => {
     const imagePart = await fileToGenerativePart(imageFile);
     const textPart = { text: `Apply this edit at hotspot (${hotspot.x}, ${hotspot.y}): ${prompt}` };
-    return callImageEditingModel([imagePart, textPart], '修饰');
+    return callImageEditingModel([imagePart, textPart], 'retouch');
 };
 
 export const generateFilteredImage = async (imageFile: File, prompt: string): Promise<string> => {
     const imagePart = await fileToGenerativePart(imageFile);
     const primaryTextPart = { text: `Apply this filter: ${prompt}` };
     try {
-        return await callImageEditingModel([imagePart, primaryTextPart], '滤镜');
+        return await callImageEditingModel([imagePart, primaryTextPart], 'filter');
     } catch (error) {
         if (error instanceof Error && error.message.includes("Model responded with text instead of an image")) {
             console.warn("Original filter prompt failed. Trying a fallback without the English prefix.");
             const fallbackTextPart = { text: prompt };
-            return await callImageEditingModel([imagePart, fallbackTextPart], '滤镜 (fallback)');
+            return await callImageEditingModel([imagePart, fallbackTextPart], 'filter (fallback)');
         }
         throw error;
     }
@@ -281,12 +283,12 @@ export const generateStyledImage = async (imageFile: File, prompt: string): Prom
     const imagePart = await fileToGenerativePart(imageFile);
     const primaryTextPart = { text: `Apply this artistic style: ${prompt}` };
     try {
-        return await callImageEditingModel([imagePart, primaryTextPart], '应用风格');
+        return await callImageEditingModel([imagePart, primaryTextPart], 'apply style');
     } catch (error) {
         if (error instanceof Error && error.message.includes("Model responded with text instead of an image")) {
             console.warn("Original styled image prompt failed. Trying a fallback without the English prefix.");
             const fallbackTextPart = { text: prompt };
-            return await callImageEditingModel([imagePart, fallbackTextPart], '应用风格 (fallback)');
+            return await callImageEditingModel([imagePart, fallbackTextPart], 'apply style (fallback)');
         }
         throw error;
     }
@@ -296,12 +298,12 @@ export const generateAdjustedImage = async (imageFile: File, prompt: string): Pr
     const imagePart = await fileToGenerativePart(imageFile);
     const primaryTextPart = { text: `Apply this adjustment: ${prompt}` };
     try {
-        return await callImageEditingModel([imagePart, primaryTextPart], '调整');
+        return await callImageEditingModel([imagePart, primaryTextPart], 'adjustment');
     } catch (error) {
         if (error instanceof Error && error.message.includes("Model responded with text instead of an image")) {
             console.warn("Original adjustment prompt failed. Trying a fallback without the English prefix.");
             const fallbackTextPart = { text: prompt };
-            return await callImageEditingModel([imagePart, fallbackTextPart], '调整 (fallback)');
+            return await callImageEditingModel([imagePart, fallbackTextPart], 'adjustment (fallback)');
         }
         throw error;
     }
@@ -311,12 +313,12 @@ export const generateTexturedImage = async (imageFile: File, prompt: string): Pr
     const imagePart = await fileToGenerativePart(imageFile);
     const primaryTextPart = { text: `Apply this texture: ${prompt}` };
     try {
-        return await callImageEditingModel([imagePart, primaryTextPart], '纹理');
+        return await callImageEditingModel([imagePart, primaryTextPart], 'texture');
     } catch (error) {
         if (error instanceof Error && error.message.includes("Model responded with text instead of an image")) {
             console.warn("Original texture prompt failed. Trying a fallback without the English prefix.");
             const fallbackTextPart = { text: prompt };
-            return await callImageEditingModel([imagePart, fallbackTextPart], '纹理 (fallback)');
+            return await callImageEditingModel([imagePart, fallbackTextPart], 'texture (fallback)');
         }
         throw error;
     }
@@ -325,7 +327,7 @@ export const generateTexturedImage = async (imageFile: File, prompt: string): Pr
 export const removeBackgroundImage = async (imageFile: File): Promise<string> => {
     const imagePart = await fileToGenerativePart(imageFile);
     const textPart = { text: 'Remove the background of this image, leaving only the main subject with a transparent background.' };
-    return callImageEditingModel([imagePart, textPart], '抠图');
+    return callImageEditingModel([imagePart, textPart], 'background removal');
 };
 
 export const generateFusedImage = async (mainImage: File, sourceImages: File[], prompt: string): Promise<string> => {
@@ -348,9 +350,10 @@ export const generateFusedImage = async (mainImage: File, sourceImages: File[], 
         const allParts = [mainImagePart, ...sourceImageParts.map(p => ({ inlineData: p.inlineData })), textPart];
         
         return await callImageEditingModel(allParts, '合成');
+        return await callImageEditingModel(allParts, 'fusion');
 
     } catch (e) {
-       throw handleApiError(e, '合成');
+       throw handleApiError(e, 'fusion');
     }
 };
 
@@ -388,7 +391,7 @@ export const generateCreativeSuggestions = async (imageFile: File, type: 'filter
         const result = JSON.parse(jsonString);
         return result.suggestions;
     } catch (e) {
-        throw handleApiError(e, '获取灵感');
+        throw handleApiError(e, 'get inspiration');
     }
 };
 
@@ -415,7 +418,7 @@ export const generateDecadeImage = async (imageDataUrl: string, prompt: string):
     try {
         // First attempt with the primary prompt
         const textPart = { text: prompt };
-        return await callImageEditingModel([imagePart, textPart], `生成 ${extractDecade(prompt)} 图像`);
+        return await callImageEditingModel([imagePart, textPart], `generate ${extractDecade(prompt)} image`);
     } catch (error) {
         // If it failed because the model returned text (prompt was likely blocked)
         if (error instanceof Error && error.message.includes("Model responded with text instead of an image")) {
@@ -426,7 +429,7 @@ export const generateDecadeImage = async (imageDataUrl: string, prompt: string):
             // Second attempt with a safer, fallback prompt
             const fallbackPrompt = getFallbackPrompt(decade);
             const fallbackTextPart = { text: fallbackPrompt };
-            return await callImageEditingModel([imagePart, fallbackTextPart], `生成 ${decade} 图像 (fallback)`);
+            return await callImageEditingModel([imagePart, fallbackTextPart], `generate ${decade} image (fallback)`);
         }
         // For other errors, re-throw them
         throw error;

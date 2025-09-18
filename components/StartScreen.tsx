@@ -105,7 +105,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
     const handlePaste = (event: ClipboardEvent) => {
       // Check if the event target is an input or textarea to avoid hijacking paste.
       const target = event.target as HTMLElement;
-      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+        setError(`Image file size cannot exceed ${MAX_FILE_SIZE_MB}MB. Please select a smaller file.`);
         return;
       }
 
@@ -136,7 +136,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
 
   const handleGenerate = async () => {
     if (!generationPrompt.trim()) {
-        setGenerationError("请输入描述内容。");
+        setGenerationError("Please enter a description.");
         return;
     }
     setIsGenerating(true);
@@ -146,28 +146,28 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
         onImageGenerated(dataUrl);
     } catch (e) {
         console.error(e);
-        setGenerationError(e instanceof Error ? e.message : '生成图像时发生未知错误。');
+        setGenerationError(e instanceof Error ? e.message : 'Unknown error occurred while generating image.');
     } finally {
         setIsGenerating(false);
     }
   };
 
   const aspectRatios: { name: string; value: typeof aspectRatio }[] = [
-    { name: '方形', value: '1:1' },
-    { name: '横向', value: '16:9' },
-    { name: '纵向', value: '9:16' },
-    { name: '风景', value: '4:3' },
-    { name: '肖像', value: '3:4' },
+    { name: 'Square', value: '1:1' },
+    { name: 'Landscape', value: '16:9' },
+    { name: 'Portrait', value: '9:16' },
+    { name: 'Photo', value: '4:3' },
+    { name: 'Vertical', value: '3:4' },
   ];
 
   return (
     <div className="flex flex-col items-center gap-6 animate-fade-in w-full max-w-5xl mx-auto text-center p-4 sm:p-8">
       <h1 className="text-5xl font-extrabold tracking-tight text-gray-100 sm:text-6xl md:text-7xl">
-        Nano Banana <span className="text-blue-400">化繁为简</span>
+        Nano Banana <span className="text-blue-400">Simplify Everything</span>
       </h1>
       <div className="max-w-2xl text-lg text-gray-400 md:text-xl flex flex-col gap-2">
-        <h3 className="text-3xl font-extrabold tracking-tight text-gray-100 sm:text-4xl md:text-5xl">至强改图模型&超好用应用</h3>
-        <p className="font-semibold text-yellow-300">用AiStudio后台API免费用,也<a href="https://youtu.be/ZxjiZKnvjt4">可 [自行部署]（Gemini API兼容）</a></p>
+        <h3 className="text-3xl font-extrabold tracking-tight text-gray-100 sm:text-4xl md:text-5xl">Powerful Image Editing Model & Super User-Friendly App</h3>
+        <p className="font-semibold text-yellow-300">Free with AiStudio backend API, or <a href="https://youtu.be/ZxjiZKnvjt4">[Self-deploy] (Gemini API compatible)</a></p>
       </div>
       
       <div className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-10 gap-6 items-stretch">
@@ -175,16 +175,16 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
         {/* Generation Column */}
         <div className="md:col-span-4 p-6 sm:p-8 bg-gray-800/30 border-2 border-gray-700/50 rounded-2xl backdrop-blur-sm flex flex-col text-left">
             <div className="flex flex-col gap-4 h-full">
-                <h2 className="text-2xl font-bold text-gray-100 text-center">用 AI <span className="text-purple-400">创造图像</span> 并修之</h2>
+                <h2 className="text-2xl font-bold text-gray-100 text-center">Create Images with AI <span className="text-purple-400">and Edit Them</span></h2>
                 <textarea
                     value={generationPrompt}
                     onChange={(e) => setGenerationPrompt(e.target.value)}
-                    placeholder="例如，“一只戴着宇航员头盔的小狗漂浮在多彩的星云中，数字艺术”"
+                    placeholder="e.g., 'A small dog wearing an astronaut helmet floating in a colorful nebula, digital art'"
                     className="w-full bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-purple-500 focus:outline-none transition text-base h-28 resize-none disabled:opacity-60"
                     disabled={isGenerating}
                 />
                 <div className="flex flex-wrap items-center gap-2">
-                    <p><span className="text-sm font-medium text-gray-400 mr-2">宽高比:</span></p>
+                    <p><span className="text-sm font-medium text-gray-400 mr-2">Aspect Ratio:</span></p>
                     <p>{aspectRatios.map(({ name, value }) => (
                         <button
                             key={value}
@@ -219,7 +219,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
                     ) : (
                         <>
                             <PaintBrushIcon className="w-6 h-6 mr-3" />
-                            生成图片
+                            Generate Image
                         </>
                     )}
                 </button>
@@ -236,7 +236,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
           <div className="flex flex-col items-center gap-3 text-center w-full">
             {templates.length > 0 && (
                 <div className="w-full">
-                    <h3 className="text-lg font-semibold text-gray-300 mb-2">或从模板开始</h3>
+                    <h3 className="text-lg font-semibold text-gray-300 mb-2">Or start with a template</h3>
                     <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
                         {displayedTemplates.map(template => (
                             <TemplateButton 
@@ -252,7 +252,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
                             <div className="w-full border-t border-gray-600"></div>
                         </div>
                         <div className="relative flex justify-center">
-                            <span className="bg-gray-800/30 px-2 text-sm text-gray-400 backdrop-blur-sm">或</span>
+                            <span className="bg-gray-800/30 px-2 text-sm text-gray-400 backdrop-blur-sm">or</span>
                         </div>
                     </div>
                 </div>
@@ -265,17 +265,17 @@ const StartScreen: React.FC<StartScreenProps> = ({ onFileSelect, onImageGenerate
                       className="flex-grow relative inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-white bg-blue-600 rounded-full cursor-pointer group-hover:bg-blue-500 transition-colors"
                   >
                       <UploadIcon className="w-6 h-6 mr-3 transition-transform duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:scale-110" />
-                      上传图片进行编辑
+                      Upload Image to Edit
                   </button>
                   <button 
                       onClick={onShowTemplateLibrary}
                       className="flex-shrink-0 p-4 bg-gray-700 text-gray-200 rounded-full cursor-pointer hover:bg-gray-600 transition-colors"
-                      title="打开模板库"
+                      title="Open Template Library"
                   >
                       <TemplateLibraryIcon className="w-6 h-6" />
                   </button>
               </div>
-              <p className="text-sm text-gray-500 mt-2">也可以直接拖放或粘贴文件到此区域</p>
+              <p className="text-sm text-gray-500 mt-2">You can also drag and drop or paste files to this area</p>
               <input id="image-upload-start" type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
             </div>
           </div>

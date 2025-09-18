@@ -56,7 +56,7 @@ const FusionPanel: React.FC<FusionPanelProps> = ({ onApplyFusion, isLoading, onE
         if (files && files.length > 0) {
             const selectedFile = files[0];
             if (selectedFile.size > MAX_FILE_SIZE_BYTES) {
-                onError(`素材图文件大小不能超过 ${MAX_FILE_SIZE_MB}MB。请选择一个较小的文件。`);
+                onError(`Source image file size cannot exceed ${MAX_FILE_SIZE_MB}MB. Please select a smaller file.`);
                 return;
             }
             onError(''); // Clear previous errors
@@ -85,8 +85,8 @@ const FusionPanel: React.FC<FusionPanelProps> = ({ onApplyFusion, isLoading, onE
             {!imageSrc ? (
                 <div className="flex flex-col items-center justify-center text-center text-gray-400 py-8 h-full">
                     <UploadIcon className="w-8 h-8 mb-2" />
-                    <p className="font-semibold">上传素材图 {id}</p>
-                    <p className="text-xs">拖放文件或 <span className="text-blue-400 font-semibold cursor-pointer" onClick={() => fileInputRef.current?.click()}>点击浏览</span></p>
+                    <p className="font-semibold">Upload Source Image {id}</p>
+                    <p className="text-xs">Drag & drop files or <span className="text-blue-400 font-semibold cursor-pointer" onClick={() => fileInputRef.current?.click()}>click to browse</span></p>
                     <input ref={fileInputRef} type="file" className="hidden" accept="image/*" onChange={(e) => handleFileSelect(e.target.files)} />
                 </div>
             ) : (
@@ -107,8 +107,8 @@ const FusionPanel: React.FC<FusionPanelProps> = ({ onApplyFusion, isLoading, onE
 
   return (
     <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col items-center gap-4 animate-fade-in backdrop-blur-sm">
-      <h3 className="text-lg font-semibold text-gray-300">智能合成</h3>
-      <p className="text-sm text-gray-400 -mt-2">上传一至三张素材图，然后描述如何将它们结合。</p>
+      <h3 className="text-lg font-semibold text-gray-300">Smart Fusion</h3>
+      <p className="text-sm text-gray-400 -mt-2">Upload one to three source images, then describe how to combine them.</p>
 
       <div className="w-full flex flex-col md:flex-row gap-4">
         <ImageUploader id={1} file={sourceImageFile1} setFile={setSourceImageFile1} fileInputRef={fileInputRef1} />
@@ -121,7 +121,7 @@ const FusionPanel: React.FC<FusionPanelProps> = ({ onApplyFusion, isLoading, onE
           type="text"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          placeholder="例如，“把图1人物放到主图中，用图2风格渲染，并加入图3的背景”"
+          placeholder="e.g., 'Put person from image 1 into main image, render with style from image 2, and add background from image 3'"
           className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
           disabled={isLoading || (!sourceImageFile1 && !sourceImageFile2 && !sourceImageFile3)}
         />
@@ -130,7 +130,7 @@ const FusionPanel: React.FC<FusionPanelProps> = ({ onApplyFusion, isLoading, onE
           className="bg-gradient-to-br from-purple-600 to-purple-500 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-purple-800 disabled:to-purple-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
           disabled={isLoading || !prompt.trim() || (!sourceImageFile1 && !sourceImageFile2 && !sourceImageFile3)}
         >
-          应用合成
+          Apply Fusion
         </button>
       </div>
     </div>

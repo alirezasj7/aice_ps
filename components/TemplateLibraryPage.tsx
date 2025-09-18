@@ -131,7 +131,7 @@ const TemplateLibraryPage: React.FC<TemplateLibraryPageProps> = ({ onTemplateSel
         <div className="w-full max-w-6xl mx-auto p-4 md:p-8 animate-fade-in">
             <div className="text-center mb-8">
                 <h2 className="font-['Caveat'] text-5xl md:text-7xl font-bold text-white tracking-wider">Awesome Nano Banana</h2>
-                <p className="text-gray-300 text-lg md:text-xl mt-2">NB提示词模板库</p>
+                <p className="text-gray-300 text-lg md:text-xl mt-2">Template Library</p>
             </div>
             
             {/* Search Bar */}
@@ -144,7 +144,7 @@ const TemplateLibraryPage: React.FC<TemplateLibraryPageProps> = ({ onTemplateSel
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="搜索模板名称或提示词..."
+                        placeholder="Search template names or prompts..."
                         className="block w-full rounded-lg border-gray-600 bg-gray-900/50 py-3 pl-11 pr-4 text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 focus:outline-none transition-colors"
                     />
                 </div>
@@ -161,7 +161,7 @@ const TemplateLibraryPage: React.FC<TemplateLibraryPageProps> = ({ onTemplateSel
                     ))
                 ) : (
                      <div className="col-span-full text-center py-16">
-                        <p className="text-gray-400 text-lg">找不到匹配 “<span className="font-semibold text-white">{searchQuery}</span>” 的模板。</p>
+                        <p className="text-gray-400 text-lg">No templates found matching "<span className="font-semibold text-white">{searchQuery}</span>".</p>
                     </div>
                 )}
             </div>
@@ -173,17 +173,17 @@ const TemplateLibraryPage: React.FC<TemplateLibraryPageProps> = ({ onTemplateSel
                         disabled={currentPage === 1}
                         className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 transition-colors hover:bg-gray-600"
                     >
-                        上一页
+                        Previous
                     </button>
                     <span className="text-gray-300">
-                        第 {currentPage} 页 / 共 {totalPages} 页
+                        Page {currentPage} of {totalPages}
                     </span>
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                         className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 transition-colors hover:bg-gray-600"
                     >
-                        下一页
+                        Next
                     </button>
                 </div>
             )}

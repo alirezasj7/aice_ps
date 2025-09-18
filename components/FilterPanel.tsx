@@ -25,10 +25,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
   const [isPresetsVisible, setIsPresetsVisible] = useState(true);
 
   const presets: Preset[] = [
-    { name: '合成波', prompt: 'Apply a vibrant 80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.' },
-    { name: '动漫风', prompt: 'Give the image a vibrant Japanese anime style, with bold outlines, cel-shading, and saturated colors.' },
+    { name: 'Synthwave', prompt: 'Apply a vibrant 80s synthwave aesthetic with neon magenta and cyan glows, and subtle scan lines.' },
+    { name: 'Anime Style', prompt: 'Give the image a vibrant Japanese anime style, with bold outlines, cel-shading, and saturated colors.' },
     { name: 'Lomo', prompt: 'Apply a Lomography-style cross-processing film effect with high-contrast, oversaturated colors, and dark vignetting.' },
-    { name: '故障艺术', prompt: 'Transform the image into a futuristic holographic projection with digital glitch effects and chromatic aberration.' },
+    { name: 'Glitch Art', prompt: 'Transform the image into a futuristic holographic projection with digital glitch effects and chromatic aberration.' },
   ];
   
   const activePrompt = selectedPresetPrompt || customPrompt;
@@ -67,7 +67,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
   return (
     <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col gap-4 animate-fade-in backdrop-blur-sm">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-gray-300">应用滤镜</h3>
+        <h3 className="text-lg font-semibold text-gray-300">Apply Filters</h3>
         <button
             onClick={handleGetSuggestions}
             disabled={isLoading || isSuggesting}
@@ -76,12 +76,12 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
             {isSuggesting ? (
                 <>
                     <Spinner className="w-5 h-5" />
-                    <span>正在获取...</span>
+                    <span>Getting...</span>
                 </>
             ) : (
                 <>
                     <SparkleIcon className="w-5 h-5" />
-                    <span>获取灵感</span>
+                    <span>Get Inspiration</span>
                 </>
             )}
         </button>
@@ -95,6 +95,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
           aria-controls="filter-presets"
         >
           <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">滤镜预设</h4>
+          <h4 className="text-md font-semibold text-gray-300 hover:text-white transition-colors">Filter Presets</h4>
           <ChevronDownIcon className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isPresetsVisible ? 'rotate-180' : ''}`} />
         </button>
       </div>
@@ -140,6 +141,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
         </div>
         <div className="relative flex justify-center">
             <span className="bg-gray-800/50 px-2 text-sm text-gray-400">或</span>
+            <span className="bg-gray-800/50 px-2 text-sm text-gray-400">or</span>
         </div>
       </div>
 
@@ -147,7 +149,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
         type="text"
         value={customPrompt}
         onChange={handleCustomChange}
-        placeholder="描述一个自定义滤镜（例如，“80年代合成波光效”）"
+        placeholder="Describe a custom filter (e.g., '80s synthwave lighting effects')"
         className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
         disabled={isLoading}
       />
@@ -159,7 +161,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onApplyFilter, isLoading, cur
             className="w-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
             disabled={isLoading || !activePrompt.trim()}
           >
-            应用滤镜
+            Apply Filter
           </button>
         </div>
       )}
